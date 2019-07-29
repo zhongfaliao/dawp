@@ -53,7 +53,7 @@ def simulate_gbm():
 
     # simulation parameters
     np.random.seed(250000)
-    gbm_dates = pd.DatetimeIndex(start='30-09-2004',
+    gbm_dates = pd.date_range(start='30-09-2004', # DatetimeIndex is deprecated, use date_range instead
                                  end='30-09-2014',
                                  freq='B')
     M = len(gbm_dates)  # time steps
@@ -133,7 +133,7 @@ def return_histogram(data):
     ''' Plots a histogram of the returns. '''
     plt.figure(figsize=(9, 5))
     x = np.linspace(min(data['returns']), max(data['returns']), 100)
-    plt.hist(np.array(data['returns']), bins=50, normed=True)
+    plt.hist(np.array(data['returns']), bins=50, density=True) # normed keyword is deprecated, use density instead
     y = dN(x, np.mean(data['returns']), np.std(data['returns']))
     plt.plot(x, y, linewidth=2)
     plt.xlabel('log returns')
